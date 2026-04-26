@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Pandas
+        uses: ./.github/actions/build-pandas
+        with:
+          editable: ${{ github.event.pull_request.title }}
